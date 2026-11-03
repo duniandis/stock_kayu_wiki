@@ -1487,6 +1487,7 @@ function resetFilter() {
      try {
          const { jsPDF } = window.jspdf;
          const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a3' });
+         pdf.setTextColor(51, 51, 51);
          if (typeof pdf.autoTable !== 'function') throw Error('Pustaka tabel PDF belum termuat.');
          const pageWidth = pdf.internal.pageSize.getWidth();
          const pageHeight = pdf.internal.pageSize.getHeight();
@@ -1521,15 +1522,16 @@ function resetFilter() {
                  startY: y,
                  margin: { left:margin, right:margin, top:16, bottom:15 },
                  theme: 'grid',
-                 styles: { font:'helvetica', fontSize:7, cellPadding:1.6, overflow:'linebreak', halign:'center', lineWidth:0.12, lineColor:[110,110,110] },
-                 headStyles: { fillColor:[233,221,244], textColor:[30,30,30], fontStyle:'bold' },
-                 alternateRowStyles: { fillColor:[250,248,252] },
+                 styles: { font:'helvetica', fontSize:7, cellPadding:1.6, overflow:'linebreak', halign:'center', textColor:[68,68,68], lineWidth:0.12, lineColor:[140,140,140] },
+                 headStyles: { fillColor:[232,223,197], textColor:[51,51,51], fontStyle:'bold' },
+                 alternateRowStyles: { fillColor:[250,249,245] },
                  columnStyles: { 1: { halign:'left' } },
                  tableWidth:'auto',
                  showHead:'everyPage',
                  didParseCell: data => {
                      if (data.section === 'body' && data.row.raw?.classList?.contains('total-row')) {
-                         data.cell.styles.fillColor = [233,221,244];
+                         data.cell.styles.fillColor = [216,207,180];
+                         data.cell.styles.textColor = [51,51,51];
                          data.cell.styles.fontStyle = 'bold';
                      }
                  }
